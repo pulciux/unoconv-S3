@@ -1,0 +1,5 @@
+/node_modules/
+/.npm/
+/.config/
+/.bash_history
+/.cache
