@@ -156,7 +156,7 @@ var httpserver = http.createServer(function (req, res) {                        
                     break;
                 case 9:
                     htmlStatus = 500;
-                    this.text = "conversion process didn't created a converted document";
+                    this.text = "conversion process didn't create a converted document";
                     break;
                 case 10:
                     htmlStatus = 500;
