@@ -261,14 +261,18 @@ var httpserver = http.createServer(function (req, res) {                        
                                             if (code === 0 && this.convertedFilePath) {                     //if the process is ended with success
                                                 var convertedFilePath = this.convertedFilePath;
                                                 var convertedFileExtension = this.convertedFileExtension;
-                                                fs.readFile(convertedFilePath, function (err, data) {  //try to read the converted document
+                                                fs.readFile(convertedFilePath, (err, data) => {  //try to read the converted document
                                                     if (err) {                  //if it can't be read
                                                         console.log(err);       //log error and send result
                                                         answerObj.send(7);
-                                                    } else {                    //if it has been read try to store the converted docmunt in object storage
+                                                    } else {                    //if it has been read try to store the converted document in object storage
+                                                        var convertedFileEncoding = cproc.execSync(`file -b --mime-encoding ${this.convertedFilePath}`, {timeout: 5000});   //extracts converted file encoding
+                                                        var convertedFileMIME = cproc.execSync(`file -b --mime-type ${this.convertedFilePath}`, {timeout: 5000});           //extracts converted file MIME-type                                                        
                                                         if (comp_url.query.dbucket)
                                                             s3ObjPrms.Bucket = comp_url.query.dbucket;                              //set destination bucket if specified
                                                         s3ObjPrms.Key = (comp_url.query.dkey ? comp_url.query.dkey : replaceExt(sourceObjCoord.key, convertedFileExtension));  //set destination key if specified
+                                                        s3ObjPrms.ContentEncoding  = convertedFileEncoding.toString().trim();
+                                                        s3ObjPrms.ContentType  = convertedFileMIME.toString().trim();
                                                         s3ObjPrms.Metadata = dataSource.Metadata;                                   //copy metadata from the source document
                                                         s3ObjPrms.Metadata.masterDocMD5 = dataSource.ETag.replace(/^"|"$/g, '');    //add source ETag to destination Metadata
                                                         if (s3ObjPrms.Metadata.name)
@@ -372,7 +376,8 @@ function setConfig() {
         config.sslEnabled = false;
     }
     return config;
-};
+}
+;
 
 AWS.config.update(setConfig());
 var s3 = new AWS.S3();

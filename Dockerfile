@@ -18,6 +18,7 @@ RUN apt-get update \
        npm \
        libreoffice \
        unoconv \
+       file \
     && apt-get clean
 
 #Copy service files
