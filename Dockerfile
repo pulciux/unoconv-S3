@@ -1,7 +1,7 @@
 FROM ubuntu
 
 MAINTAINER Gianluigi Belli <gianluigi.belli@blys.it>
-LABEL Description="A scalable document files format converter service based on nodejs, AWS S3 object sotrage (and compatible), libreoffice and unoconv" Vendor="blys" Version="1.0"
+LABEL Description="A scalable document files format converter service based on nodejs, AWS S3 object sotrage (and compatible), libreoffice and unoconv" Vendor="blys" Version="1.1.2"
 
 #Service Base dir and default user
 ENV UCS3BASEDIR /var/lib/unoconv-s3/
@@ -34,7 +34,7 @@ RUN cd $UCS3BASEDIR && npm install
 WORKDIR $UCS3BASEDIR
 
 #Set the user as executor user
-USER $UCS3USER 
+USER $UCS3USER
 
 #Start the service
 CMD ["nodejs","Unoconv-S3.js"]

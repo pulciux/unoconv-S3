@@ -1,7 +1,7 @@
 {
   "name" : "Unoconv-S3",
   "description" : "A scalable document files format converter service based on nodejs, AWS S3 object sotrage (and compatible), libreoffice and unoconv",
-  "version" : "1.0.0",
+  "version" : "1.1.2",
   "main" : "./Unoconv-S3.js",
   "author" : {
     "name" : "Gianluigi Belli",

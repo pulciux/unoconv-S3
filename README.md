@@ -1,4 +1,4 @@
-# Unoconv-S3 ver. 1.0.1
+# Unoconv-S3 ver. 1.1.1
 
 [https://hub.docker.com/r/blys/unoconv-s3/](https://hub.docker.com/r/blys/unoconv-s3/)
 
@@ -6,7 +6,7 @@ Is a scalable document files format converter service based on nodejs, AWS S3 ob
 
 ### The problem
 
-Let's say that in your application you have to manage the conversion of document files such as MS-Word files, Open Document files, Rich text files, spreadsheets, presentations and so on, to a different format.  
+Let's say that in your application you have to manage the conversion of document files such as MS-Word files, Open Document files, Rich text files, spreadsheets, presentations and so on, to a different format.
 You want to be able to easily scale up this feature as the load of your system grows.
 
 [Unoconv](https://github.com/dagwieers/unoconv) can do conversions for you, exploiting the ability of [LibreOffice](https://www.libreoffice.org/) and [OpenOffice](https://www.openoffice.org/) to **work as a server and without GUI**.
@@ -149,7 +149,7 @@ services:
             - AWS_ENDPOINT=s3.compatible.service.example.org
             - AWS_REGION=us-east-1
             - AWS_SSLENABLED=true
-            - AWS_S3FORCEPATHSTYLE=true        
+            - AWS_S3FORCEPATHSTYLE=true
         networks:
             - objStorage
     doc-uploader:
