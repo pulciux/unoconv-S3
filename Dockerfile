@@ -1,7 +1,7 @@
 FROM ubuntu
 
 MAINTAINER Gianluigi Belli <gianluigi.belli@blys.it>
-LABEL Description="A scalable document files format converter service based on nodejs, AWS S3 object sotrage (and compatible), libreoffice and unoconv" Vendor="blys" Version="1.1.2"
+LABEL Description="A scalable document files format converter service based on nodejs, AWS S3 object sotrage (and compatible), libreoffice and unoconv" Vendor="blys" Version="1.1.3"
 
 #Service Base dir and default user
 ENV UCS3BASEDIR /var/lib/unoconv-s3/
