@@ -269,7 +269,6 @@ var httpserver = http.createServer(function (req, res) {                        
                             s3ObjPrms.ContentEncoding = convertedFileEncoding.toString().trim();
                             s3ObjPrms.ContentType = convertedFileMIME.toString().trim();
                             s3ObjPrms.Metadata = dataSource.Metadata;                                   //copy metadata from the source document
-                            s3ObjPrms.Metadata.masterDocMD5 = dataSource.ETag.replace(/^"|"$/g, '');    //add source ETag to destination Metadata
                             if (s3ObjPrms.Metadata.name)
                               s3ObjPrms.Metadata.name = replaceExt(s3ObjPrms.Metadata.name, convertedFileExtension);  //replace name extension
                             s3ObjPrms.Body = data;                              //set the destination datablock
