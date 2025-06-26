@@ -7,25 +7,32 @@ LABEL Description="A scalable document files format converter service based on n
 ENV UCS3BASEDIR /var/lib/unoconv-s3/
 ENV UCS3USER unoconv-s3-run
 
-#Adds a user to run the service
-RUN addgroup $UCS3USER \
-    && adduser --home $UCS3BASEDIR --disabled-password --ingroup $UCS3USER $UCS3USER
-
 #Install packages
 RUN apt-get update \
     && apt-get install -y \
+       adduser \
        nodejs \
        npm \
        libreoffice \
        unoconv \
        file \
+       python3-distutils-extra \
+       fonts-open-sans \
     && apt-get clean
+
+#Adds a user to run the service
+RUN addgroup $UCS3USER \
+    && adduser --home $UCS3BASEDIR --disabled-password --ingroup $UCS3USER $UCS3USER
 
 #Copy service files
 COPY ./Unoconv-S3.js $UCS3BASEDIR
 COPY ./package.json $UCS3BASEDIR
 COPY ./README.md $UCS3BASEDIR
 COPY ./LICENSE.txt $UCS3BASEDIR
+COPY ./ExtraFonts /usr/share/fonts/
+
+#Update font cache
+RUN fc-cache -fv
 
 #Install service dependencies
 RUN cd $UCS3BASEDIR && npm install
